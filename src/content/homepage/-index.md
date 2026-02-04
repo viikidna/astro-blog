@@ -1,7 +1,7 @@
 ---
 banner:
   title: Welcome **!**
-  title_small: to Andik Kurniwan's Blog
+  title_small: to Andik's Blog
   content: Sebuah catatan tentang project yang saya kerjakan. Semoga bermanfaat.
   image_enable: true
   image: /images/banner-author.png
