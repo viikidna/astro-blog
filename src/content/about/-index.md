@@ -1,19 +1,19 @@
 ---
-title: About The Author
+title: About Me
 image: /images/author.png
 meta_title: ""
 description: "meta description"
 education:
-  title: Formal Education
+  title: Pendidikan
   degrees:
-    - university: "Southeast University"
-      content: "1985 • 1991 • gravida nibh velvelit auctor alimo quet menean solli"
-    - university: "Northeast University"
-      content: "1985 • 1991 • gravida nibh velvelit auctor alimo quet menean solli"
-    - university: "Easteast University"
-      content: "1985 • 1991 • gravida nibh velvelit auctor alimo quet menean solli"
-    - university: "Southeast University"
-      content: "1985 • 1991 • gravida nibh velvelit auctor alimo quet menean solli"
+    - university: Southeast University
+      content: 1985 • 1991 • gravida nibh velvelit auctor alimo quet menean solli
+    - university: Northeast University
+      content: 1985 • 1991 • gravida nibh velvelit auctor alimo quet menean solli
+    - university: Easteast University
+      content: 1985 • 1991 • gravida nibh velvelit auctor alimo quet menean solli
+    - university: Southeast University
+      content: 1985 • 1991 • gravida nibh velvelit auctor alimo quet menean solli
 
 experience:
   title: Work Experience
