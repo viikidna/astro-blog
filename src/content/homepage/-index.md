@@ -1,13 +1,13 @@
 ---
 banner:
   title: Welcome **!**
-  title_small: "to John Bravo's Blog"
-  content: Are Developer and recently started your own business Already made website to ensure presence wants to develop.
+  title_small: to Andik Kurniwan's Blog
+  content: Sebuah catatan tentang project yang saya kerjakan. Semoga bermanfaat.
   image_enable: true
   image: /images/banner-author.png
   button:
     enable: true
-    label: Know About Me
+    label: Kenalan Yuk
     link: /about
     rel: ""
 
@@ -16,11 +16,12 @@ featured_posts:
   title: Featured Posts
 
 promotion:
-  enable: true
+  enable: false
   image: /images/promotion.png
-  link: "/contact"
+  link: /contact
 
 recent_posts:
   title: Recent Posts
   enable: true
+draft: true
 ---
