@@ -23,5 +23,6 @@ promotion:
 recent_posts:
   title: Recent Posts
   enable: true
-draft: false
+draft: true
 ---
+​
