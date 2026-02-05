@@ -25,7 +25,7 @@
     "post_folder": "posts"
   },
   "params": {
-    "contact_form_action": "#",
+    "contact_form_action": "https://formspree.io/f/xqedzwlq",
     "footer_content": "Catatan teknis, jaringan, dan sistem",
     "copyright": "Designed and Developed By [Andik Kurniawan](https://zuu.my.id/)"
   },
