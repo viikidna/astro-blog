@@ -3,7 +3,7 @@ import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import AutoImport from "astro-auto-import";
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 import remarkCollapse from "remark-collapse";
 import remarkToc from "remark-toc";
 import sharp from "sharp";
@@ -26,6 +26,25 @@ export default defineConfig({
 
   image: { service: sharp() },
   vite: { plugins: [tailwindcss()] },
+
+  experimental: {
+    fonts: [
+      {
+        name: "Raleway",
+        cssVariable: "--font-primary",
+        provider: fontProviders.google(),
+        weights: [400],
+        fallbacks: ["sans-serif"],
+      },
+      {
+        name: "Merriweather Sans",
+        cssVariable: "--font-secondary",
+        provider: fontProviders.google(),
+        weights: [400, 700],
+        fallbacks: ["sans-serif"],
+      },
+    ],
+  },
 
   integrations: [
     react(),

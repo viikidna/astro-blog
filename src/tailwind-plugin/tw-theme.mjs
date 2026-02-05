@@ -67,8 +67,10 @@ const fontVars = {};
 Object.entries(fontSizes).forEach(([key, value]) => {
   fontVars[`--text-${key}`] = value;
 });
+// Font variables are set by Astro Experimental Fonts API; only define fallback for utilities
 Object.entries(fontFamilies).forEach(([key, font]) => {
-  fontVars[`--font-${key}`] = font;
+  const fallback = themeConfig.fonts.font_family[`${key}_type`] || "sans-serif";
+  fontVars[`--font-${key}-fallback`] = fallback;
 });
 
 const baseVars = { ...fontVars, ...defaultVars };
@@ -92,7 +94,9 @@ module.exports = plugin.withOptions(() => {
 
     const fontUtils = {};
     Object.keys(fontFamilies).forEach((key) => {
-      fontUtils[`.font-${key}`] = { fontFamily: `var(--font-${key})` };
+      fontUtils[`.font-${key}`] = {
+        fontFamily: `var(--font-${key}), var(--font-${key}-fallback, sans-serif)`,
+      };
     });
     Object.keys(fontSizes).forEach((key) => {
       fontUtils[`.text-${key}`] = { fontSize: `var(--text-${key})` };
