@@ -23,7 +23,7 @@ const { title, social_links, meta_title, description } = contact.data;
         <Image
           width={1280}
           height={800}
-          class="-z-[1] object-cover object-top absolute inset-0"
+          class="-z-1 object-cover object-top absolute inset-0"
           src={"/images/map.png"}
           alt="map bg"
           format="webp"
@@ -45,9 +45,11 @@ const { title, social_links, meta_title, description } = contact.data;
             </span>
           </h2>
           <form
+            id="contact-form"
             class="contact-form mt-12"
             method="POST"
-            action={contact_form_action}>
+            action={contact_form_action}
+            data-action={contact_form_action}>
             <div class="mb-6">
               <label class="mb-2 block font-secondary" for="name">
                 Full name
@@ -106,13 +108,49 @@ const { title, social_links, meta_title, description } = contact.data;
               </label>
               <textarea
                 class="form-textarea w-full"
+                name="message"
                 placeholder="Hello I’m Mr ‘x’ from………….."
-                rows="7"></textarea>
+                rows="7"
+                required></textarea>
             </div>
-            <input class="btn btn-primary" type="submit" value="Send Now" />
+            <input
+              id="contact-form-submit"
+              class="btn btn-primary"
+              type="submit"
+              value="Send Now"
+            />
           </form>
         </div>
       </div>
+
+      <!-- Contact feedback modal (hidden by default) -->
+      <div
+        id="contact-modal"
+        aria-hidden="true"
+        class="contact-modal fixed inset-0 z-50 flex items-center justify-center bg-black/50 opacity-0 invisible transition-opacity duration-200">
+        <div
+          class="contact-modal-backdrop absolute inset-0"
+          aria-label="Close modal"></div>
+        <div
+          class="contact-modal-box relative z-10 mx-4 w-full max-w-md rounded border border-border bg-body p-6 text-text shadow-lg dark:border-darkmode-border dark:bg-darkmode-body dark:text-darkmode-text-light">
+          <h3
+            id="contact-modal-title"
+            class="font-secondary text-xl font-bold text-text-dark dark:text-darkmode-text-light">
+            Message sent
+          </h3>
+          <p id="contact-modal-message" class="mt-3">
+            Your message has been sent. We'll get back to you soon.
+          </p>
+          <button
+            type="button"
+            class="btn btn-primary mt-6"
+            id="contact-modal-close"
+            aria-label="Close">
+            Close
+          </button>
+        </div>
+      </div>
+
       <div class="row">
         {
           social_links.map((link) => (
@@ -134,4 +172,86 @@ const { title, social_links, meta_title, description } = contact.data;
       </div>
     </div>
   </section>
+  <style>
+    .contact-modal.contact-modal-open {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+  <script>
+    (function () {
+      const form = document.getElementById("contact-form") as HTMLFormElement | null;
+      const submitBtn = document.getElementById("contact-form-submit") as HTMLInputElement | null;
+      const modal = document.getElementById("contact-modal");
+      const modalTitle = document.getElementById("contact-modal-title");
+      const modalMessage = document.getElementById("contact-modal-message");
+      const modalClose = document.getElementById("contact-modal-close");
+      const modalBackdrop = modal?.querySelector(".contact-modal-backdrop");
+
+      const SUCCESS_TITLE = "Message sent";
+      const SUCCESS_MESSAGE =
+        "Your message has been sent. We'll get back to you soon.";
+      const ERROR_TITLE = "Something went wrong";
+      const ERROR_MESSAGE = "Please try again later.";
+
+      function showModal(title: string, message: string) {
+        if (!modal || !modalTitle || !modalMessage) return;
+        modalTitle.textContent = title;
+        modalMessage.textContent = message;
+        modal.setAttribute("aria-hidden", "false");
+        modal.classList.add("contact-modal-open");
+      }
+
+      function hideModal() {
+        if (!modal) return;
+        modal.setAttribute("aria-hidden", "true");
+        modal.classList.remove("contact-modal-open");
+      }
+
+      function setSubmitting(submitting: boolean) {
+        if (!submitBtn) return;
+        submitBtn.disabled = submitting;
+        submitBtn.value = submitting ? "Sending…" : "Send Now";
+      }
+
+      if (modalClose) modalClose.addEventListener("click", hideModal);
+      if (modalBackdrop) modalBackdrop.addEventListener("click", hideModal);
+
+      if (!form) return;
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const action =
+          form.getAttribute("data-action") || form.getAttribute("action") || "";
+        if (!action || action === "#") return;
+
+        setSubmitting(true);
+        try {
+          const body = new FormData(form);
+          const response = await fetch(action, {
+            method: "POST",
+            body,
+            headers: { Accept: "application/json" },
+          });
+
+          if (response.ok) {
+            form.reset();
+            showModal(SUCCESS_TITLE, SUCCESS_MESSAGE);
+          } else {
+            let errMsg = ERROR_MESSAGE;
+            try {
+              const data = (await response.json()) as { errors?: Array<{ message?: string }> };
+              if (data?.errors?.length) {
+                errMsg = data.errors.map((e) => e.message ?? "").join(", ");
+              }
+            } catch (_) {}
+            showModal(ERROR_TITLE, errMsg);
+          }
+        } catch (_) {
+          showModal(ERROR_TITLE, ERROR_MESSAGE);
+        } finally {
+          setSubmitting(false);
+        }
+      });
+    })();
+  </script>
 </Base>
