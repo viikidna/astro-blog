@@ -17,7 +17,7 @@ export default function Comments({ postSlug }: CommentsProps) {
     setIsClient(true);
   }, []);
 
-  if (!isClient || authLoading || commentsLoading) {
+  if (!isClient) {
     return (
       <div className="space-y-4">
         <div className="h-12 w-full animate-pulse rounded-lg bg-gray-200 dark:bg-gray-700" />
@@ -57,7 +57,12 @@ export default function Comments({ postSlug }: CommentsProps) {
       )}
 
       <div className="space-y-4">
-        {comments.length === 0 ? (
+        {commentsLoading ? (
+          <div className="space-y-3">
+            <div className="h-24 w-full animate-pulse rounded-lg bg-gray-200 dark:bg-gray-700" />
+            <div className="h-24 w-full animate-pulse rounded-lg bg-gray-200 dark:bg-gray-700" />
+          </div>
+        ) : comments.length === 0 ? (
           <p className="text-center text-gray-500 dark:text-gray-400">
             No comments yet. Be the first to comment!
           </p>
