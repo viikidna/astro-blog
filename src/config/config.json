@@ -61,9 +61,8 @@
     "meta_image": "/images/og-image.png",
     "meta_description": "astro and andik kurniawan blog"
   },
-  "disqus": {
+  "comments": {
     "enable": true,
-    "shortname": "themefisher-template",
-    "settings": {}
+    "system": "supabase"
   }
 }

@@ -19,6 +19,7 @@
     "@astrojs/react": "4.2.3",
     "@astrojs/rss": "^4.0.15",
     "@astrojs/sitemap": "3.3.0",
+    "@supabase/supabase-js": "^2.95.2",
     "astro": "^5.17.1",
     "astro-auto-import": "^0.4.4",
     "astro-font": "^1.0.0",

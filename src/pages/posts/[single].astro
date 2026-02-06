@@ -1,8 +1,8 @@
 ---
 import InnerPagination from "@/components/InnerPagination.astro";
 import Post from "@/components/post.astro";
-import { disqus, settings } from "@/config/config.json";
-import Disqus from "@/helpers/Disqus";
+import Comments from "@/components/Comments/Comments";
+import { comments, settings } from "@/config/config.json";
 import DynamicIcon from "@/helpers/DynamicIcon";
 import Base from "@/layouts/Base.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
@@ -96,9 +96,10 @@ const relatedPosts = similarItems(post, postEntries);
             </div>
             {InnerPaginationOptions.enableBottom && <InnerPagination />}
           </article>
-          <div class="mt-16">
-            {disqus.enable && <Disqus client:load />}
-          </div>
+          <section class="mt-16 border-t pt-8">
+            <h2 class="mb-8 text-2xl font-bold">Comments</h2>
+            {comments.enable && <Comments client:load postSlug={post.id} />}
+          </section>
         </div>
         <Sidebar
           posts={postEntries.filter((singlePost) => singlePost.id !== post.id)}
