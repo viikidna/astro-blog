@@ -1,9 +1,9 @@
 ---
 import InnerPagination from "@/components/InnerPagination.astro";
 import Post from "@/components/post.astro";
-import { settings } from "@/config/config.json";
+import { disqus, settings } from "@/config/config.json";
+import Disqus from "@/helpers/Disqus";
 import DynamicIcon from "@/helpers/DynamicIcon";
-import Giscus from "@/helpers/Giscus.astro";
 import Base from "@/layouts/Base.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import { getTaxonomy } from "@/lib/taxonomyParser.astro";
@@ -96,7 +96,9 @@ const relatedPosts = similarItems(post, postEntries);
             </div>
             {InnerPaginationOptions.enableBottom && <InnerPagination />}
           </article>
-          <Giscus className="mt-16" />
+          <div class="mt-16">
+            {disqus.enable && <Disqus client:load />}
+          </div>
         </div>
         <Sidebar
           posts={postEntries.filter((singlePost) => singlePost.id !== post.id)}
