@@ -61,9 +61,19 @@
     "meta_image": "/images/og-image.png",
     "meta_description": "astro and andik kurniawan blog"
   },
-  "disqus": {
-    "enable": true,
-    "shortname": "themefisher-template",
-    "settings": {}
+  "giscus": {
+    "enable": false,
+    "repo": "viikidna/astro-blog",
+    "repo_id": "",
+    "category": "General",
+    "category_id": "",
+    "mapping": "pathname",
+    "strict": "0",
+    "reactions_enabled": "1",
+    "emit_metadata": "0",
+    "input_position": "top",
+    "theme": "preferred_color_scheme",
+    "lang": "en",
+    "loading": "lazy"
   }
 }

@@ -262,12 +262,8 @@ footer .socials {
   }
 }
 
-.embed-refresh body {
-  background-color: black !important;
-}
-
-#disqus_thread {
-  color-scheme: none;
+.giscus-wrapper {
+  @apply w-full;
 }
 
 /* theme toggle svg */
